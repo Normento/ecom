@@ -27,7 +27,7 @@
               </div>
             </div>
           </div>
-                      <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                 @if (Session::has('error_message'))
@@ -59,7 +59,7 @@
                   </div>
               @endif
                   <h4 class="card-title">Update admin details</h4>
-                  <form class="forms-sample" action="{{route('update-admin-details')}}"         method="POST" id="updateAdminPasswordForm">
+                  <form class="forms-sample" action="{{route('update-admin-details')}}"         method="POST" id="updateAdminPasswordForm" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                       <label>Admin Email/Username</label>
@@ -76,6 +76,14 @@
                     <div class="form-group">
                       <label for="admin_mobile">Mobile</label>
                       <input  type="text" id="admin_mobile" class="form-control" name="admin_mobile" placeholder="Enter your phone number" value="{{Auth::guard('admin')->user()->mobile}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="admin_image">Photo</label>
+                      <input  type="file" id="admin_image" class="form-control" name="admin_image">
+                      @if (!empty(Auth::guard('admin')->user()->image))
+                        <a href="{{url(Auth::guard('admin')->user()->image)}}" target="_blank" rel="noopener noreferrer">View image</a>
+                        <input type="hidden" name="current_admin_image" value="{{Auth::guard('admin')->user()->image}}">
+                      @endif
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>

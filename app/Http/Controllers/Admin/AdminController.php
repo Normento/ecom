@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -45,10 +46,28 @@ class AdminController extends Controller
                 'admin_mobile' => 'required|numeric|'
             ];
             $this->validate($request,$rules);
+            //upload admin photo
+            if ($request->hasFile('admin_image')) {
+                $image_tmp = $request->file('admin_image');
+                if ($image_tmp->isValid()) {
+                    //get image extention
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    //generate new image name
+                    $imageName = rand(111,99999).'.'.$extension;
+                    $imagePath = 'admin/images/photos/'.$imageName;
+                    //upload the image
+                    Image::make($image_tmp)->save($imagePath);
+                }
+            }else if(!empty($data['current_admin_image'])){
+                $imagePath = $data['current_admin_image'] ;
+            }else{
+                $imagePath = "" ;
+            }
             //update admin details
             Admin::where('id', Auth::guard('admin')->user()->id)->update([
                 'name' => $data['admin_name'],
-                'mobile' => $data['admin_mobile']
+                'mobile' => $data['admin_mobile'],
+                'image' => $imagePath
             ]);
             return redirect()->back()->with('success_message', 'Your details has been updated succesfully');
         }
