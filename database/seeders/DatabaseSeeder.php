@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\VendorsTableSeeder;
+use Database\Seeders\VendorsBankDetailsTableSeeder;
+use Database\Seeders\VendorsBusinessDetailsTableSeeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AdminsTableSeeder::class);
+        //$this->call(AdminsTableSeeder::class);
+        //$this->call(VendorsTableSeeder::class);
+        //$this->call(VendorsBankDetailsTableSeeder::class);
+        $this->call(VendorsBusinessDetailsTableSeeder::class);
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

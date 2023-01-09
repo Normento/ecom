@@ -6,8 +6,8 @@
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Settings</h3>
-                            <h6 class="font-weight-normal mb-0">Update admin details</h6>
+                            <h3 class="font-weight-bold">Update Vendor Personal details</h3>
+                            <h6 class="font-weight-normal mb-0"></h6>
                         </div>
                     </div>
                 </div>
@@ -43,8 +43,8 @@
                                 </ul>
                             </div>
                         @endif
-                        <h4 class="card-title">Update admin details</h4>
-                        <form class="forms-sample" action="{{ route('update-admin-details') }}" method="POST"
+                        <h4 class="card-title">Update vendor personal details</h4>
+                        <form class="forms-sample" action="{{ route('update-vendors-personal-details') }}" method="POST"
                             id="updateAdminPasswordForm" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -53,28 +53,48 @@
                                     value="{{ Auth::guard('admin')->user()->email }} "readonly>
                             </div>
                             <div class="form-group">
-                                <label>Admin type</label>
-                                <input type="email" class="form-control"
-                                    value="{{ Auth::guard('admin')->user()->type }} "readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" id="admin_name" class="form-control" name="admin_name" placeholder=""
+                                <label for="vendor_name">Name</label>
+                                <input type="text" id="vendor_name" class="form-control" name="vendor_name" placeholder="Enter vendor name"
                                     value="{{ Auth::guard('admin')->user()->name }}">
                             </div>
                             <div class="form-group">
-                                <label for="admin_mobile">Mobile</label>
-                                <input type="text" id="admin_mobile" class="form-control" name="admin_mobile"
+                                <label for="vendor_address">Addresse</label>
+                                <input type="text" id="vendor_address" class="form-control" name="vendor_address" placeholder="Enter vendor addresse"
+                                    value="{{$vendorDetails['address']}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendor_city">City</label>
+                                <input type="text" id="vendor_city" class="form-control" name="vendor_city" placeholder="Enter vendor city"
+                                    value="{{$vendorDetails['city']}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendor_state">State</label>
+                                <input type="text" id="vendor_state" class="form-control" name="vendor_state" placeholder="Enter vendor state"
+                                    value="{{$vendorDetails['state']}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendor_country">Country</label>
+                                <input type="text" id="vendor_country" class="form-control" name="vendor_country" placeholder="Enter vendor country"
+                                    value="{{$vendorDetails['country']}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendor_pincode">PINCODE</label>
+                                <input type="text" id="vendor_pincode" class="form-control" name="vendor_pincode" placeholder="Enter vendor pincode"
+                                    value="{{$vendorDetails['pincode']}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendor_mobile">Mobile</label>
+                                <input type="text" id="vendor_mobile" class="form-control" name="vendor_mobile"
                                     placeholder="Enter your phone number"
                                     value="{{ Auth::guard('admin')->user()->mobile }}">
                             </div>
                             <div class="form-group">
-                                <label for="admin_image">Photo</label>
-                                <input type="file" id="admin_image" class="form-control" name="admin_image">
+                                <label for="vendor_image">Photo</label>
+                                <input type="file" id="vendor_image" class="form-control" name="vendor_image">
                                 @if (!empty(Auth::guard('admin')->user()->image))
                                     <a href="{{ url(Auth::guard('admin')->user()->image) }}" target="_blank"
                                         rel="noopener noreferrer">View image</a>
-                                    <input type="hidden" name="current_admin_image"
+                                    <input type="hidden" name="current_vendor_image"
                                         value="{{ Auth::guard('admin')->user()->image }}">
                                 @endif
                             </div>

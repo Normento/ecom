@@ -14,7 +14,7 @@ $(document).ready(function () {
                     $('#check_password').html("<font color='red'>Current Password is not correct")
                 } else if (resp == 'true') {
                     $("#check_password").html(
-                        "<font color='greer'>Current Password is correct"
+                        "<font color='green'>Current Password is correct"
                     );
                 }
             }, error: function () {

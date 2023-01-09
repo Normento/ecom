@@ -42,6 +42,12 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('check-current-password', 'AdminController@checkCurrentPassword');
         //Update admin details
         Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails')->name('update-admin-details');
+        //Update Vendors business details
+        Route::match(['get', 'post'], 'update-vendor-details/business', 'AdminController@updateVendorsBusinessDetails')->name('update-vendors-business-details');
+        //Update vendor personal details
+        Route::match(['get', 'post'], 'update-vendor-details/personal', 'AdminController@updateVendorsPersonalDetails')->name('update-vendors-personal-details');
+        //Update vendor bank details
+        Route::match(['get', 'post'], 'update-vendor-details/bank', 'AdminController@updateVendorsBankDetails')->name('update-vendors-bank-details');
 
         //Admin logout route
 
