@@ -61,6 +61,15 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         //Admin logout route
 
         Route::get('logout','AdminController@logout')->name('admin.logout');
+
+        //Sections
+        Route::get('sections', 'SectionController@sections')->name('sections');
+        //update section status
+        Route::post('update-section-status', 'SectionController@updateSectionStatus');
+        //Categories
+        Route::get('categories', 'SectionController@sections')->name('categories');
+        //Products
+        Route::get('products', 'SectionController@sections')->name('products');
     });
 
 });

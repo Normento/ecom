@@ -53,6 +53,20 @@
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-catalogue" aria-expanded="false" aria-controls="ui-catalogue">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Catalogue Management</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-catalogue">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('sections')}}">Sections</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('categories')}}">Categories</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('products')}}">Products</a></li>
+              </ul>
+            </div>
+          </li>
             <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-users" aria-expanded="false" aria-controls="ui-users">
               <i class="icon-layout menu-icon"></i>
