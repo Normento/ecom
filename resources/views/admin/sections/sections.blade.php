@@ -15,7 +15,24 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
+                    @if (Session::has('error_message'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error :</strong>{{ Session::get('error_message') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                    @if (Session::has('success_message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success :</strong>{{ Session::get('success_message') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                   <h4 class="card-title">Sections</h4>
+                  <a style="max-width:150px; float:right;display:inline-block" href="{{route('addsection')}}" class="btn btn-primary btn-block">Add Sections</a>
                   <div class="table-responsive pt-3">
                     <table id="section" class="table table-bordered">
                       <thead>
@@ -53,12 +70,12 @@
                             @endif
                           </td>
                           <td>
-{{--                             <a href="{{route('add.edit.section'),$section['id']}}">
+                            <a href="{{route('editsection',$section['id'])}}">
                                 <i style="font-size: 25px; color:blue" class="mdi mdi-pencil-box"></i>
                             </a>
-                            <a href="{{route('delete.section')}}">
+                            <a href="{{route('section.delete',$section['id'])}}">
                                 <i style="font-size: 25px; color:blue" class="mdi mdi-file-excel-box"></i>
-                            </a> --}}
+                            </a>
                           </td>
                         </tr>
                         @endforeach
