@@ -42,6 +42,13 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('check-current-password', 'AdminController@checkCurrentPassword');
         //Update admin details
         Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails')->name('update-admin-details');
+        //Update admin status
+        Route::post('update-admin-status', 'AdminController@updateAdminStatus');
+        //Admin logout route
+        Route::get('logout', 'AdminController@logout')->name('admin.logout');
+
+        //Vendors
+
         //Update Vendors business details
         Route::match(['get', 'post'], 'update-vendor-details/business', 'AdminController@updateVendorsBusinessDetails')->name('update-vendors-business-details');
         //Update vendor personal details
@@ -49,18 +56,11 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         //Update vendor bank details
         Route::match(['get', 'post'], 'update-vendor-details/bank', 'AdminController@updateVendorsBankDetails')->name('update-vendors-bank-details');
         //View Admins Subadmins Vendors
-
         Route::get('admins/{type}', 'AdminController@admins')->name('manage.admins');
         Route::get('admins', 'AdminController@allAdmins')->name('manage.admins.all');
         //View vendor details
         Route::get('view-vendor-details/{id}', 'AdminController@viewVendorDetails')->name('view-vendor-details');
-        //Update admin status
 
-        Route::post('update-admin-status', 'AdminController@updateAdminStatus');
-
-        //Admin logout route
-
-        Route::get('logout','AdminController@logout')->name('admin.logout');
 
         //Sections
         Route::get('sections', 'SectionController@sections')->name('sections');
@@ -72,10 +72,25 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::delete('delete-section/{section}', 'SectionController@deletesections')->name('section.delete');
         //update section status
         Route::post('update-section-status', 'SectionController@updateSectionStatus');
+
+
         //Categories
-        Route::get('categories', 'SectionController@sections')->name('categories');
-        //Products
-        Route::get('products', 'SectionController@sections')->name('products');
+        Route::get('categories', 'CategoryControllers@categories')->name('categories');
+        //Update category status
+        Route::post('update-category-status', 'CategoryControllers@updateCategoryStatus');
+        // Add category
+        Route::match(['get', 'post'], 'add-category', 'CategoryControllers@addCategory')->name('addcategory');
+        //Edit category
+        Route::match(['get', 'post'], 'edit-category/{category}', 'CategoryControllers@editCategory')->name('editcategory');
+        //append-category-level
+        Route::get('append-categories-level', 'CategoryControllers@appendCategoryLevel');
+        Route::get('delete-category/{id}', 'CategoryControllers@deleteCategory');
+
+
+
+
+        //Brands
+        Route::get('brands', 'SectionController@sections')->name('brands');
     });
 
 });

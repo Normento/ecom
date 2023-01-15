@@ -1,3 +1,6 @@
+const { result } = require("lodash");
+const { default: swal } = require("sweetalert");
+
 $(document).ready(function () {
     //datatables
     $("#section").DataTable({
@@ -98,4 +101,81 @@ $(document).ready(function () {
                 },
             });
         });
+
+    //Update category status
+
+    $(document).on("click", ".updateCategoryStatus", function () {
+        var status = $(this).children("i").attr("status");
+        var category_id = $(this).attr("category_id");
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "post",
+            url: "/admin/update-category-status",
+            data: { status: status, category_id: category_id },
+            success: function (resp) {
+                //alert(resp);
+                if (resp["status"] == 0) {
+                    $("#category-" + category_id).html(
+                        '<i style="font-size: 25px; color:blue" class="mdi mdi-bookmark-outline" status="Inactive"></i>'
+                    );
+                } else if (resp["status"] == 1) {
+                    $("#category-" + category_id).html(
+                        '<i style="font-size: 25px; color:blue" class="mdi mdi-bookmark-check" status="Active"></i>'
+                    );
+                }
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    });
+
+    // Comfirm delete
+
+    $(".ComfirmDelete").click(function () {
+        var module = $(this).attr('module')
+        var moduleid = $(this).attr('moduleid')
+        //alert(moduleid);
+        Swal({
+            title: "Are you sure?",
+            text: "Once deleted, you won't be able to revert this",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((result)=>{
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'your file has been deleted.',
+                    'success'
+                )
+                window.location = "/admin/delete-" + module + "/" + moduleid;
+            }
+        })
+    })
+
+    //append categories level
+
+    $("#section_id").change(function () {
+        var section_id = $(this).val();
+        //alert(section_id);
+
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            type: "get",
+            url: '/admin/append-categories-level',
+            data: { section_id: section_id },
+            success: function (resp) {
+                //alert(resp);
+                $("#appendCategoriesLevel").html(resp);
+            },
+            error: function () {
+                alert("Error");
+            },
+        });
+    })
 })
