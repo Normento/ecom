@@ -87,10 +87,15 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('delete-category/{id}', 'CategoryControllers@deleteCategory');
 
 
-
-
         //Brands
-        Route::get('brands', 'SectionController@sections')->name('brands');
+        Route::get('brands', 'BrandsController@brands')->name('brands');
+        //update brand status
+        Route::post('update-brand-status', 'BrandsController@updateBrandStatus');
+        //Add brand
+        Route::match(['get', 'post'], 'add-brands', 'BrandsController@addBrands')->name('addbrand');
+        //Edit brand
+        Route::match(['get', 'post'], 'edit-brands/{brand}', 'BrandsController@editBrands')->name('editbrand');
+
     });
 
 });

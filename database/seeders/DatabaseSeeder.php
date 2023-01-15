@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\BrandsTableSeeder;
 use Database\Seeders\SectionTableSeeder;
 use Database\Seeders\VendorsTableSeeder;
 use Database\Seeders\CategoryTableSeeder;
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
         //$this->call(VendorsBankDetailsTableSeeder::class);
         //$this->call(VendorsBusinessDetailsTableSeeder::class);
         //$this->call(SectionTableSeeder::class);
-        $this->call(CategoryTableSeeder::class);
+        //$this->call(CategoryTableSeeder::class);
+        $this->call(BrandsTableSeeder::class);
 
         // \App\Models\User::factory(10)->create();
 
